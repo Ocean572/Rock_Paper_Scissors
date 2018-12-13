@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<style>
+</style>
+<body>
+    <h1 id="myHeader1">Rock Paper Scissors</h1>
+    <div class="row">
+        <div class="column">
+            <img id="rock" src="images/rock.png" alt="rock"></img>
+            <p class="gameText1">Rock</p>
+        </div>
+        <div class="column">
+            <img id="paper" src="images/paper.png" alt="paper"></img>
+            <p class="gameText2">Paper</p>
+        </div>
+        <div class="column">
+            <img id="scissors" src="images/scissors.png" alt="scissors"></img>
+            <p class="gameText3">Scissors</p>
+        </div>
+    </div>
+    <h2>Outcome:<span id="outcome"></span></h2>
+    <p class="scoreBoard">Player Score = <span id="player">0</span></p>
+    <p class="scoreBoard">Computer Score = <span id="computer">0</span></p>
+    <script>
+
+        let score1 = 0; //me
+        let score2 = 0; //computer
+        let roundResult;
+        let computerScore;
+
+        let randomNumGen = function() {
+            return Math.floor(Math.random() * 3);
+        };
+        
+        let computerPlay = function() {
+            number = randomNumGen()
+            switch(number) {
+                case(0):
+                    computerScore = "rock";
+                    break;
+                case(1):
+                    computerScore = "paper";
+                    break;
+                case(2):
+                    computerScore = "scissors";
+            }
+        };
+
+        document.getElementById("rock").addEventListener("click", rockSelection);
+        document.getElementById("paper").addEventListener("click", paperSelection);
+        document.getElementById("scissors").addEventListener("click", scissorsSelection);
+
+        function rockSelection() {
+            computerPlay();
+            if (computerScore == "rock") {
+                roundResult = "You tied";
+                playerScore();
+            }   else if (computerScore == "paper") {
+                    roundResult = "You lost";
+                    playerScore();
+            }   else if (computerScore == "scissors") {
+                    roundResult = "You won";
+                    playerScore();
+            }   else {
+                    return("error");
+            }
+        };
+
+        function paperSelection() {
+            computerPlay();
+            if (computerScore == "paper") {
+                roundResult = "You tied";
+                playerScore();
+            }   else if (computerScore == "scissors") {
+                    roundResult = "You lost";
+                    playerScore();
+            }   else if (computerScore == "rock") {
+                    roundResult = "You won";
+                    playerScore();
+            }   else {
+                    return("error");
+            }
+        };
+
+        function scissorsSelection() {
+            computerPlay();
+            if (computerScore == "scissors") {
+                roundResult = "You tied";
+                playerScore();
+            }   else if (computerScore == "rock") {
+                    roundResult = "You lost";
+                    playerScore();
+            }   else if (computerScore == "paper") {
+                    roundResult = "You won";
+                    playerScore();
+            }   else {
+                    return("error");
+            }
+        };
+
+        let playerScore = function() {
+            if (roundResult == "You lost") {
+                score2++;
+                document.getElementById("computer").innerHTML = (score2);
+                endGame();
+                reset();
+            }   else if (roundResult == "You won") {
+                    score1++;
+                    document.getElementById("player").innerHTML = (score1);
+                    endGame();
+                    reset();
+            }   else if (roundResult == "You tied") {
+                    endGame();
+                    reset();
+            }
+        };
+
+        function reset() {
+            roundResult = "";
+            computerScore = "";
+        };
+
+        function endGameReset() {
+            score1 = 0;
+            score2 = 0;
+            document.getElementById("player").innerHTML = (score1);
+            document.getElementById("computer").innerHTML = (score2);
+        };
+
+        function endGame() {
+            if (score1 == 3) {
+                alert("YOU WON THE GAME AGAINST THE COMPUTER");
+                endGameReset();
+            }   else if (score2 == 3) {
+                    alert("YOU LOST THE GAME AGAINST THE COMPUTER");
+                    endGameReset();
+            }
+        };
+        
+
+
+
+
+    </script>
+</body>
+</html>

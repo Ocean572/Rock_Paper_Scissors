@@ -1,0 +1,78 @@
+h1 {
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+h2 {
+    width: 150px;
+    border: 1px solid red;
+    margin: auto;
+    text-align: center;
+}
+
+.scoreBoard {
+    text-align: center;
+}
+
+.column {
+    position: relative;
+    float: right;
+    width: 33.33%;
+    padding: 0px;
+}
+
+.column img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 80px;
+    opacity: 0.75;
+}
+
+.column img:hover {
+    opacity: 1.0;
+}
+
+.gameText1 {
+    position: absolute;
+    top: 25%;
+    margin-left: 45%;
+    color: red;
+    visibility: hidden;
+}
+
+.column:hover .gameText1 {
+    visibility: visible;
+}
+
+.column:hover .gameText2 {
+    visibility: visible;
+}
+
+.column:hover .gameText3 {
+    visibility: visible;
+}
+
+.gameText2 {
+    position: absolute;
+    top: 25%;
+    margin-left: 45%;
+    color: red;
+    visibility: hidden;
+}
+
+.gameText3 {
+    position: absolute;
+    top: 25%;
+    margin-left: 41%;
+    color: red;
+    visibility: hidden;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
