@@ -22,15 +22,29 @@
             <p class="gameText3">Scissors</p>
         </div>
     </div>
+    <div class="row2">
+        <div class="column1 transition">
+            <img id="playerDecision"></img>
+        </div>
+        <div class="column3">
+            <img id="computerDecision"></img>
+        </div>
+    </div>
     <h2>Outcome:<span id="outcome"></span></h2>
-    <p class="scoreBoard">Player Score = <span id="player">0</span></p>
-    <p class="scoreBoard">Computer Score = <span id="computer">0</span></p>
+    <div id="outcome2">
+        <p class="scoreBoard">Player Score = <span id="player">0</span></p>
+        <p class="scoreBoard">Computer Score = <span id="computer">0</span></p>
+    </div>
     <script>
 
         let score1 = 0; //me
         let score2 = 0; //computer
         let roundResult;
         let computerScore;
+        let element1 = document.querySelector("#playerDecision");
+        let element2 = document.querySelector(".column1");
+        let src = document.createAttribute('src');
+        let interval = null;
 
         let randomNumGen = function() {
             return Math.floor(Math.random() * 3);
@@ -50,9 +64,38 @@
             }
         };
 
-        document.getElementById("rock").addEventListener("click", rockSelection);
-        document.getElementById("paper").addEventListener("click", paperSelection);
-        document.getElementById("scissors").addEventListener("click", scissorsSelection);
+        document.getElementById("rock").addEventListener("click", function() {
+            playerChoiceTransR();
+            rockSelection();
+        });
+        document.getElementById("paper").addEventListener("click", function() {
+            playerChoiceTransP();
+            paperSelection();
+        });
+        document.getElementById("scissors").addEventListener("click", function() {
+            playerChoiceTransS();
+            scissorsSelection();
+        });
+
+        //code for player selection transitions
+        let playerChoiceTransR = function() {
+            src.value = "images/rock.png";
+            element1.setAttributeNode(src);
+            element2.classList.add("playerChoiceTrans");
+        }
+
+        let playerChoiceTransP = function() {
+            src.value = "images/paper.png";
+            element1.setAttributeNode(src);
+            element2.classList.add("playerChoiceTrans");           
+        }
+
+        let playerChoiceTransS = function() {
+            src.value = "images/scissors.png";
+            element1.setAttributeNode(src);
+            element2.classList.add("playerChoiceTrans");           
+        }
+        //end of code for player selection transitions
 
         function rockSelection() {
             computerPlay();
@@ -118,11 +161,35 @@
                     reset();
             }
         };
-
+        //going to create a loop until button is clicked in order to stop next round. This will limit interactions with the rest of the page!!!!!!
         function reset() {
             roundResult = "";
             computerScore = "";
+            let button1 = document.createElement("button");
+            let t = document.createTextNode("CLICK TO ENTER NEXT ROUND");
+            button1.appendChild(t); //find some way to align button in the center
+            button1.classList.add("stopBTN");
+            document.querySelector("#outcome2").appendChild(button1);
+            var i = 0;
+            interval = setInterval(function() {
+                console.log(i++);
+            }, 1);
+
+            document.querySelector(".stopBTN").addEventListener("click", function() {
+                clearInterval(interval);
+                resetElements();
+            })
+
+            //element1.removeAttribute("src"); CREATES BUG - immediately deletes everything
+            //element2.classList.remove("playerChoiceTrans")
         };
+
+        function resetElements() {
+            element1.removeAttribute("src");
+            element2.classList.remove("playerChoiceTrans");
+            let button2 = document.querySelector(".stopBTN");
+            document.querySelector("#outcome2").removeChild(button2);
+        }
 
         function endGameReset() {
             score1 = 0;

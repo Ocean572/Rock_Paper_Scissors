@@ -16,9 +16,36 @@ h2 {
 
 .column {
     position: relative;
-    float: right;
+    float: left;
     width: 33.33%;
     padding: 0px;
+}
+
+.column1 {
+    position: relative;
+    float: left;
+    height: 173px;
+    padding-bottom: 20px;
+}
+
+.column3 {
+    position: relative;
+    float: right;
+    width: 33.33%;
+    height: 173px;
+    padding-bottom: 20px;
+}
+
+.transition {
+    -webkit-transition: left 2s ease-out;
+    -moz-transition: left 2s ease-out;
+    -o-transition: left 2s ease-out;
+    transition: left 2s ease-out;
+    left: -15vw;
+}
+
+.playerChoiceTrans {
+    left: 10.2vw !important;
 }
 
 .column img {
@@ -70,6 +97,12 @@ h2 {
 }
 
 .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.row2::after {
     content: "";
     clear: both;
     display: table;
